@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter02/match-needle/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

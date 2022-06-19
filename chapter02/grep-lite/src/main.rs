@@ -1,3 +1,6 @@
+use std::fs::File;
+use std::io::BufReader;
+use std::io::prelude::*;
 use regex::Regex;
 use clap::{App, Arg};
 
@@ -10,25 +13,32 @@ fn main() {
             .takes_value(true)
             .required(true)
         )
+        .arg(Arg::with_name("input")
+            .help("File to search")
+            .takes_value(true)
+            .required(true)
+        )
         .get_matches();
 
     let pattern = args.value_of("pattern").unwrap();
+    let input = args.value_of("input").unwrap();
+
     let re = Regex::new(pattern).unwrap();
+    let f = File::open(input).unwrap();
+    let reader = BufReader::new(f);
+
+    let mut lines: Vec<String> = vec![];
+
+    for line_ in reader.lines() {
+        lines.push(line_.unwrap());
+    }
+
     let ctx_lines = 2;
-    let quote = "\
-Every face, every shop,
-bedroom window, public-house, and
-dark square is a picture
-feverishly turned--in search of what?
-It is the same with books.
-What do we seek
-through millions of pages?";
     let mut tags : Vec<usize> = vec![];
     let mut ctx: Vec<Vec<(usize, String)>> = vec![];
 
-    for (i, line) in quote.lines().enumerate() {
-        let contains_substring = re.find(line);
-        match contains_substring {
+    for (i, line) in lines.iter().enumerate() {
+        match re.find(&line) {
             Some(_) => {
                 tags.push(i);
 
@@ -43,7 +53,7 @@ through millions of pages?";
         return;
     }
 
-    for (i, line) in quote.lines().enumerate() {
+    for (i, line) in lines.iter().enumerate() {
         for (j, tag) in tags.iter().enumerate() {
             let lower_bound = tag.saturating_sub(ctx_lines);
             let upper_bound = tag + ctx_lines;

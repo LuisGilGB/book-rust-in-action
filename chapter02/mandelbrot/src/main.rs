@@ -1,6 +1,6 @@
 use num::complex::Complex;
 
-fn calculate_madelbrot(
+fn calculate_mandelbrot(
     max_iters: usize,
     x_min: f64,
     x_max: f64,
@@ -30,7 +30,7 @@ fn mandelbrot_at_point(
     cy: f64,
     max_iters: usize
 ) -> usize {
-    let mut z = Complex { re: 0.0, im: 0.0};
+    let mut z = Complex { re: 0.0, im: 0.0 };
     let c = Complex::new(cx, cy);
 
     for i in 0..=max_iters {
@@ -42,7 +42,7 @@ fn mandelbrot_at_point(
     max_iters
 }
 
-fn render_madelbrot(
+fn render_mandelbrot(
     escape_vals: Vec<Vec<usize>>
 ) {
     for row in escape_vals {
@@ -67,6 +67,6 @@ fn render_madelbrot(
 }
 
 fn main() {
-    let mandelbrot = calculate_madelbrot(1000, -2.0, 1.0, -1.0, 1.0, 100, 24);
-    render_madelbrot(mandelbrot);
+    let mandelbrot = calculate_mandelbrot(1000, -2.0, 1.0, -1.0, 1.0, 100, 24);
+    render_mandelbrot(mandelbrot);
 }

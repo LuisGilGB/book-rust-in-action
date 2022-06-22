@@ -8,12 +8,14 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter02/needle-in-haystack/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter02/arrays/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter02/grep-lite/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter03/file-api/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/needle-in-haystack/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/mandelbrot/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/grep-lite/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/arrays/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter03/file-api/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,13 +1,14 @@
-use rand::prelude::*;
-
-fn one_in(denominator: u32) -> bool {
-  thread_rng().gen_ratio(1, denominator)
+#[derive(Debug, PartialEq)]
+enum FileState {
+  Open,
+  Closed,
 }
 
 #[derive(Debug)]
 struct File {
   name: String,
   data: Vec<u8>,
+  state: FileState,
 }
 
 impl File {
@@ -15,19 +16,17 @@ impl File {
     File {
       name: String::from(name),
       data: Vec::new(),
+      state: FileState::Closed,
     }
-  }
-
-  fn new_with_data(name: &str, data: &Vec<u8>) -> File {
-    let mut file = File::new(name);
-    file.data = data.clone();
-    file
   }
 
   fn read(
     self: &File,
     save_to: &mut Vec<u8>
   ) -> Result<usize, String> {
+    if self.state != FileState::Open {
+      return Err(String::from("File must be open for reading"));
+    }
     let mut tmp = self.data.clone();
     let read_length = tmp.len();
     save_to.reserve(read_length);
@@ -36,25 +35,25 @@ impl File {
   }
 }
 
-fn open(file: File) -> Result<File, String> {
-  if one_in(4) {
-    return Err(String::from("Permission denied"));
-  }
+fn open(mut file: File) -> Result<File, String> {
+  file.state = FileState::Open;
   Ok(file)
 }
 
-fn close(file: File) -> Result<File, String> {
-  if one_in(100_000) {
-    return Err(String::from("Interrupted by signal"));
-  }
+fn close(mut file: File) -> Result<File, String> {
+  file.state = FileState::Closed;
   Ok(file)
 }
 
 
 fn main() {
-  let mut file = File::new_with_data("f1.txt", &vec![114, 117, 115, 116, 33, 33]);
+  let mut file = File::new("new-file.txt");
 
   let mut buffer: Vec<u8> = vec![];
+
+  if file.read(&mut buffer).is_err() {
+    println!("Error checking is working");
+  }
 
   file = open(file).unwrap();
   let f1_length = file.read(&mut buffer).unwrap();

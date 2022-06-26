@@ -1,4 +1,5 @@
-#![allow(unused_variables)]
+//! Simulating files one step at a time.
+
 use std::fmt;
 use std::fmt::{Display};
 
@@ -10,16 +11,18 @@ trait Read {
 }
 
 #[derive(Debug, PartialEq)]
-enum FileState {
+pub enum FileState {
   Open,
   Closed,
 }
 
+/// Represents a "file",
+/// which probably lives in a file system.
 #[derive(Debug)]
-struct File {
+pub struct File {
   name: String,
   data: Vec<u8>,
-  state: FileState,
+  pub state: FileState,
 }
 
 impl Display for FileState {
@@ -51,12 +54,29 @@ impl Read for File {
 }
 
 impl File {
-  fn new(name: &str) -> File {
+  /// Creates a new, empty `File`.
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// let f = File::new("f1.txt");
+  /// ```
+  pub fn new(name: &str) -> File {
     File {
       name: String::from(name),
       data: Vec::new(),
       state: FileState::Closed,
     }
+  }
+
+  /// Returns the file's length in bytes.
+  pub fn len(&self) -> usize {
+    self.data.len()
+  }
+
+  /// Returns the file's name.
+  pub fn name(&self) -> String {
+    self.name.clone()
   }
 }
 
@@ -81,13 +101,16 @@ fn main() {
   }
 
   file = open(file).unwrap();
-  let f1_length = file.read(&mut buffer).unwrap();
+  file.read(&mut buffer).unwrap();
   file = close(file).unwrap();
 
   let text = String::from_utf8_lossy(&buffer);
 
+  let file_name = file.name();
+  let file_length = file.len();
+
   println!("{:?}", file);
   println!("{}", file);
-  println!("{} is {} bytes long", &file.name, &f1_length);
+  println!("{} is {} bytes long", file_name, file_length);
   println!("{}", text);
 }

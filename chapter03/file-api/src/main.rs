@@ -1,3 +1,14 @@
+#![allow(unused_variables)]
+use std::fmt;
+use std::fmt::{Display};
+
+trait Read {
+  fn read(
+    self: &Self,
+    save_to: &mut Vec<u8>,
+  ) -> Result<usize, String>;
+}
+
 #[derive(Debug, PartialEq)]
 enum FileState {
   Open,
@@ -11,19 +22,23 @@ struct File {
   state: FileState,
 }
 
-impl File {
-  fn new(name: &str) -> File {
-    File {
-      name: String::from(name),
-      data: Vec::new(),
-      state: FileState::Closed,
+impl Display for FileState {
+  fn fmt(&self, formatter: &mut fmt::Formatter) -> std::fmt::Result {
+    match *self {
+      FileState::Open => write!(formatter, "Open"),
+      FileState::Closed => write!(formatter, "Closed"),
     }
   }
+}
 
-  fn read(
-    self: &File,
-    save_to: &mut Vec<u8>
-  ) -> Result<usize, String> {
+impl Display for File {
+  fn fmt(&self, formatter: &mut fmt::Formatter) -> std::fmt::Result {
+    write!(formatter, "<{} ({})>", self.name, self.state)
+  }
+}
+
+impl Read for File {
+  fn read(self: &File, save_to: &mut Vec<u8>) -> Result<usize, String> {
     if self.state != FileState::Open {
       return Err(String::from("File must be open for reading"));
     }
@@ -32,6 +47,16 @@ impl File {
     save_to.reserve(read_length);
     save_to.append(&mut tmp);
     Ok(read_length)
+  }
+}
+
+impl File {
+  fn new(name: &str) -> File {
+    File {
+      name: String::from(name),
+      data: Vec::new(),
+      state: FileState::Closed,
+    }
   }
 }
 
@@ -62,6 +87,7 @@ fn main() {
   let text = String::from_utf8_lossy(&buffer);
 
   println!("{:?}", file);
+  println!("{}", file);
   println!("{} is {} bytes long", &file.name, &f1_length);
   println!("{}", text);
 }

@@ -1,6 +1,8 @@
-#![allow(unused_variables)]
+use rand::prelude::*;
 
-static mut ERROR: i32 = 0;
+fn one_in(denominator: u32) -> bool {
+  thread_rng().gen_ratio(1, denominator)
+}
 
 #[derive(Debug)]
 struct File {
@@ -25,22 +27,27 @@ impl File {
   fn read(
     self: &File,
     save_to: &mut Vec<u8>
-  ) -> usize {
+  ) -> Result<usize, String> {
     let mut tmp = self.data.clone();
     let read_length = tmp.len();
     save_to.reserve(read_length);
     save_to.append(&mut tmp);
-    read_length
+    Ok(read_length)
   }
 }
 
-fn open(f: &mut File) -> bool {
-  true
+fn open(file: File) -> Result<File, String> {
+  if one_in(4) {
+    return Err(String::from("Permission denied"));
+  }
+  Ok(file)
 }
 
-fn close(f: &mut File) -> bool {
-  unsafe { ERROR = -1; }
-  true
+fn close(file: File) -> Result<File, String> {
+  if one_in(100_000) {
+    return Err(String::from("Interrupted by signal"));
+  }
+  Ok(file)
 }
 
 
@@ -49,19 +56,9 @@ fn main() {
 
   let mut buffer: Vec<u8> = vec![];
 
-  open(&mut file);
-  let f1_length = file.read(&mut buffer);
-  unsafe {
-    if ERROR != 0 {
-      panic!("An error has occurred while reading the file")
-    }
-  }
-  close(&mut file);
-  unsafe {
-    if ERROR != 0 {
-      panic!("An error has occurred while closing the file")
-    }
-  }
+  file = open(file).unwrap();
+  let f1_length = file.read(&mut buffer).unwrap();
+  file = close(file).unwrap();
 
   let text = String::from_utf8_lossy(&buffer);
 

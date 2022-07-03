@@ -14,6 +14,7 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter05/deconst-f32/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter05/q7/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter05/cpu-emulator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter06/pointer-intro/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/needle-in-haystack/target" />
@@ -26,6 +27,7 @@
       <excludeFolder url="file://$MODULE_DIR$/chapter05/deconst-f32/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter05/q7/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter05/cpu-emulator/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter06/pointer-intro/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

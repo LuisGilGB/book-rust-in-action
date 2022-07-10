@@ -16,6 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter05/cpu-emulator/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter06/pointer-intro/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter06/heap-via-box/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter06/memscan/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter06/particles/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
@@ -32,6 +33,7 @@
       <excludeFolder url="file://$MODULE_DIR$/chapter06/pointer-intro/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter06/heap-via-box/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter06/particles/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter06/memscan/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

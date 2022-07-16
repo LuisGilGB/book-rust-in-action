@@ -120,3 +120,8 @@ Examples of conditions for cfg attributes:
 - `target_vendor`
 - `test`
 - `debug_assertions`
+
+## Controling endianess of reading and writing operations
+
+The `byteorder` crate provides utils to read and write following some given endianess, so keeping the same endianess in
+both operations will keep our applications comunications with files properly synced.

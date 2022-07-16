@@ -7,9 +7,9 @@ const BYTES_PER_LINE: usize = 16;
 fn main() -> std::io::Result<()> {
   let arg1 = env::args().nth(1);
 
-  let fname = arg1.expect("usage: fview FILENAME");
+  let file_name = arg1.expect("usage: fview FILENAME");
 
-  let mut file = File::open(&fname).expect("Unable to open file");
+  let mut file = File::open(&file_name).expect("Unable to open file");
   let mut position = 0;
   let mut buffer = [0; BYTES_PER_LINE];
 

@@ -18,6 +18,7 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter06/heap-via-box/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter06/memscan/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter06/particles/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter07/serde-demo/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/needle-in-haystack/target" />
@@ -34,6 +35,7 @@
       <excludeFolder url="file://$MODULE_DIR$/chapter06/heap-via-box/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter06/particles/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter06/memscan/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter07/serde-demo/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

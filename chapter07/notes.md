@@ -83,3 +83,40 @@ hello_address.extension() // Returns the extension as a Some, Some("txt") follow
 ```
 
 Beware both types are not guaranteed to be UTF-8 compliant.
+
+## Conditional compilation
+
+`cfg` attributes can be used to tell the compiler to use or not stuff conditionally on which one is the target OS (or
+other concerns such as CPU model or architecture).
+
+Examples:
+
+Stuff that will be compiled for Windows:
+
+```rust
+# [cfg(target_os = "windows")]
+```
+
+Stuff that will be compiled for any OS different to Windows:
+
+```rust
+# [cfg(not(target_os = "windows"))]
+```
+
+Notice that compiled files for Windows will have a `.exe` extension.
+
+Apart from `not(...)`, there are other modifier functions to operate iver `cfg` matchers, such as `all(...)`
+or `any(...)`.
+
+Examples of conditions for cfg attributes:
+
+- `target_arch`
+- `target_os`
+- `target_family`
+- `target_env`
+- `target_endian`,
+- `target_pointer_width`
+- `target_has_atomic`
+- `target_vendor`
+- `test`
+- `debug_assertions`

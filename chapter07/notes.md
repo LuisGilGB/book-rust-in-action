@@ -23,3 +23,6 @@ let merida = City {
 let as_json = to_json(&merida).unwrap();
 ```
 Other formats: bincode and CBOR (both are non human-readable formats, but more performant than JSON).
+
+---
+`String::from_utf8_lossy()` converts bytes to a string encoded with UTF-8.

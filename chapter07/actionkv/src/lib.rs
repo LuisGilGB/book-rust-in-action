@@ -6,7 +6,7 @@ use std::io::{BufReader, BufWriter, SeekFrom};
 use std::path::Path;
 
 use byteorder::{LittleEndian, ReadBytesExt, WriteBytesExt};
-use crc::{Crc, Algorithm, CRC32, CRC_32_CKSUM};
+use crc::{Crc, CRC_32_CKSUM};
 use serde_derive::{Deserialize, Serialize};
 
 type ByteString = Vec<u8>;
@@ -14,14 +14,14 @@ type ByteStr = [u8];
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct KeyValuePair {
-  key: ByteStr,
-  value: ByteString,
+  pub key: ByteString,
+  pub value: ByteString,
 }
 
 #[derive(Debug)]
 pub struct ActionKV {
   file: File,
-  pub index_map: HashMap<ByteStr, u64>,
+  pub index_map: HashMap<ByteString, u64>,
 }
 
 impl ActionKV {
@@ -65,7 +65,7 @@ impl ActionKV {
     }
 
     let value = data.split_off(key_len as usize);
-    let key = data as ByteStr;
+    let key = data;
 
     Ok(KeyValuePair { key, value })
   }
@@ -87,7 +87,7 @@ impl ActionKV {
           match err.kind() {
             io::ErrorKind::UnexpectedEof => {
               break;
-            }
+            },
             _ => return Err(err),
           }
         }
@@ -133,8 +133,8 @@ impl ActionKV {
           match err.kind() {
             io::ErrorKind::UnexpectedEof => {
               break;
-            }
-            _ => Err(err),
+            },
+            _ => return Err(err),
           }
         }
       };
@@ -147,15 +147,15 @@ impl ActionKV {
     Ok(found)
   }
 
-  pub fn insert(&mut self, key: &ByteStr, value: &ByteString) -> io::Result<()> {
+  pub fn insert(&mut self, key: &ByteStr, value: &ByteStr) -> io::Result<()> {
     let position = self.insert_but_ignore_index(key, value)?;
 
-    self.index_map.insert(*key, position);
+    self.index_map.insert(key.to_vec(), position);
     Ok(())
   }
 
-  pub fn insert_but_ignore_index(&mut self, key: &ByteStr, value: &ByteString) -> io::Result<u64> {
-    let mut file = BufReader::new(&mut self.file);
+  pub fn insert_but_ignore_index(&mut self, key: &ByteStr, value: &ByteStr) -> io::Result<u64> {
+    let mut file = BufWriter::new(&mut self.file);
 
     let key_len = key.len();
     let val_len = value.len();
@@ -183,12 +183,12 @@ impl ActionKV {
   }
 
   #[inline]
-  pub fn update(&mut self, key: &ByteStr, value: &ByteString) -> io::Result<()> {
+  pub fn update(&mut self, key: &ByteStr, value: &ByteStr) -> io::Result<()> {
     self.insert(key, value)
   }
 
   #[inline]
   pub fn delete(&mut self, key: &ByteStr) -> io::Result<()> {
-    self.insert(key, b"" as &ByteString)
+    self.insert(key, b"")
   }
 }

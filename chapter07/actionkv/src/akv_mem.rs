@@ -30,9 +30,9 @@ fn main() {
   store.load().expect("Unable to load data");
 
   match action {
-    "get" => match store.get(key).unwrap() {
-      None => eprintln!("{:?} not found", key),
-      Some(value) => println!("{:?}", value),
+    "get" => match store.get(&key).unwrap() {
+      None => eprintln!("{:?} not found", String::from_utf8_lossy(&key)),
+      Some(value) => println!("{:?}", String::from_utf8_lossy(&value as &[u8])),
     },
 
     "delete" => store.delete(key).unwrap(),

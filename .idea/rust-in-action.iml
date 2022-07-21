@@ -22,6 +22,8 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter07/byteorder-demo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter07/fview/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter07/serde-demo/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter08/enchanters-trait-objects/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter08/reqwest-demo/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/needle-in-haystack/target" />
@@ -42,6 +44,8 @@
       <excludeFolder url="file://$MODULE_DIR$/chapter07/fview/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter07/actionkv/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter07/byteorder-demo/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter08/reqwest-demo/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter08/enchanters-trait-objects/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -38,3 +38,30 @@ Trait objects can appear in three forms:
 - `&dyn Trait` <- Borrowed and immutable.
 - `&mut dyn Trait` <- Borrowed and mutable.
 - `Box<dyn Trait>` <- Owned trait object.
+
+Sneak peak of a Rust concept: Trait objects are a form of *type erasure*.
+
+### Trait vs type
+
+Trait objects and type parameters may seem similar; but they are used in different places.
+
+Example:
+
+```rust
+use rand::Rng;
+use rand::rngs::ThreadRng;
+```
+
+In this example, `Rng` is a trait and `ThreadRng` is a struct. This means:
+
+- If a function argument is defined as `&dyn Rng`, that argument is a reference of something that implements the `Rng`
+  trait.
+- If a function argument is defined as `&ThreadRng`, that argument is a reference of a value of `ThreadRng` type.
+
+Common use cases for trait objects:
+
+- Creating collections of heterogeneous objects.
+- Returning a value tha might be of one of multiple types.
+- Supporting dynamic dispatch (remember that trait objects enable polymorphism at runtime).
+
+Any classical OOP concept that is close to trait objects? Perhaps, mixins.

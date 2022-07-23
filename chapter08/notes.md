@@ -1,5 +1,14 @@
 # Chapter 8: Networking
 
+## Some Cargo notes
+
+```shell
+cargo run -q -- an-argument
+```
+
+- `-q` option mutes any intermediate output.
+- `--` passes arguments on the right to the executable build by the operation on the left.
+
 ## Layered models
 
 In a layered network model, higher levels are more abstract and are agnostic to the implementations of the lower levels.

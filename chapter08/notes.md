@@ -65,3 +65,12 @@ Common use cases for trait objects:
 - Supporting dynamic dispatch (remember that trait objects enable polymorphism at runtime).
 
 Any classical OOP concept that is close to trait objects? Perhaps, mixins.
+
+## TCP
+
+Some stuff about the TCP protocol:
+
+- A new line is usually expressed as `"\r\n"`.
+- Two blank new lines (`"\r\n\r\n"`) signify end of the request.
+
+A `&str` defined as `b""` is actually a buffer of bytes.

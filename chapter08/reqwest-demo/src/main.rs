@@ -1,17 +1,11 @@
 use std::error::Error;
-use std::future::poll_fn;
-use reqwest;
+use reqwest::blocking::get;
 
-async fn do_reqwest() -> Result<(), Box<dyn Error>> {
+fn main() -> Result<(), Box<dyn Error>> {
   let url = "http://www.rustinaction.com/";
-  let response = reqwest::get(url).await?;
-
-  let content = response.text().await?;
+  let response = get(url)?;
+  let content = response.text()?;
   println!("{}", content);
 
   Ok(())
-}
-
-fn main() {
-  poll_fn(do_reqwest());
 }

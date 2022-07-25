@@ -25,6 +25,7 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter08/enchanters-trait-objects/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter08/reqwest-demo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter08/dns-resolve/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter08/mac-address-generator/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter08/my-stdlib-http-client/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
@@ -50,6 +51,7 @@
       <excludeFolder url="file://$MODULE_DIR$/chapter08/enchanters-trait-objects/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter08/my-stdlib-http-client/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter08/dns-resolve/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter08/mac-address-generator/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

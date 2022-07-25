@@ -75,6 +75,93 @@ Common use cases for trait objects:
 
 Any classical OOP concept that is close to trait objects? Perhaps, mixins.
 
+## Error handling
+
+Until now, we have resolved simple error scenarios with the question mark (`?`) operator. This operator is no more than
+syntactic sugar for the `try!` macro. This, as it's what `try!` implements, means that:
+
+- If the expression returns `Ok(value)`, the macro returns `value`.
+- If the expression returns `Err(err)`, the macro returns `err` converted to the error type defined in the caller
+  function. Tha caller function also returns early.
+
+This implementation has the drawback of `try!`/`?` not being proper for a function that might return errors of different
+types (with ones not being able to convert to others). Fortunately, there are some ways to tackle this.
+
+```rust
+fn main() -> Result<(), std::io::Error> {
+  let _file = File::open("input.txt")?;
+
+  let _localhost = "::1"
+    .parse::<Ipv6Addr>()?;
+
+  Ok(())
+}
+```
+
+`File::open` might return a `std::io::Error`, the same type of error found in `main`'s signature, but `parse` would
+return `std::net::AddrParseError` instead, an error type which doesn't implement the `From<AddrParseError>` trait (
+unless we might do if that is a possibility). As a consequence, this code would not compile.
+
+A valid strategy to allow this is defining the error type that might return the function dynamically by using trait
+objects. In other words, the error result should be `Box<dyn Error>` (notice every error type would have implemented
+the `Error` trait):
+
+```rust
+fn main() -> Result<(), Box<dyn Error>> {
+  // Same function body as the previous block
+}
+```
+
+This function would actually compile, although bringing a small runtime penalty. Also, reference of the original error
+type might be lost outside the caller function.
+
+Another strategy would be to define our own error type that includes the possible errors as values of an enum and
+implementing the `std::convert::From` for all those error types to our custom one:
+
+```rust
+use std::fs::File;
+use std::fmt;
+use std::io;
+use std::net;
+use std::error;
+
+#[derive(Debug)]
+enum UpstreamError {
+  IO(io::Error),
+  Parsing(net::AddrParseError),
+}
+
+impl fmt::Display for UpstreamError {
+  fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+    write!(formatter, "{:?}", self)
+  }
+}
+
+impl error::Error for UpstreamError {}
+
+impl From<io::Error> for UpstreamError {
+  fn from(error: io::Error) -> Self {
+    UpstreamError::IO(error)
+  }
+}
+
+impl From<net::AddrParseError> for UpstreamError {
+  fn from(error: net::AddrParseError) -> Self {
+    UpstreamError::Parsing(error)
+  }
+}
+
+fn main() -> Result<(), UpstreamError> {
+  let _file = File::open("input.txt")?;
+  let _localhost = "::1".parse::<net::Ipv6Addr>()?;
+
+  Ok(())
+}
+```
+
+Panicking with the use of `expect` or `unwrap` is also a possibility, but it's a discouraged solution for libraries as
+it removes every possibility of control to the consumer.
+
 ## TCP
 
 Some stuff about the TCP protocol:

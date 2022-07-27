@@ -27,6 +27,7 @@
       <sourceFolder url="file://$MODULE_DIR$/chapter08/dns-resolve/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter08/mac-address-generator/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter08/my-stdlib-http-client/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter09/local-clock/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/count-until-timeout/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/match-needle/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter02/needle-in-haystack/target" />
@@ -52,6 +53,7 @@
       <excludeFolder url="file://$MODULE_DIR$/chapter08/my-stdlib-http-client/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter08/dns-resolve/target" />
       <excludeFolder url="file://$MODULE_DIR$/chapter08/mac-address-generator/target" />
+      <excludeFolder url="file://$MODULE_DIR$/chapter09/local-clock/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

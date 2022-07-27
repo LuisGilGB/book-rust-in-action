@@ -41,3 +41,17 @@ register just to keep this count in a dedicated space. Irregularities when one o
 - **High resolution** - Clocks of high accuracy (just nanoseconds). Usually implemented within CPU chips due to their
   speed.
 - **Fast clock** - Fast read operations at the cost of worse accuracy and precission.
+
+## Encoding time
+
+Usual approach: two 32 bits integers: one that counts seconds and another one that counts fractions of a second.
+
+- Advantages of having fixed width integers:
+  - Simplicity.
+  - Efficiency (basic arithmetics).
+- Disadvantages:
+  - The range is finite.
+  - Discrete way of tracking a continuous metric such as time.
+
+Implementations are not consistent across all options. Timezones are also a source of disparity, although a usual
+approach is storing another integer with the seconds offset from UTC.

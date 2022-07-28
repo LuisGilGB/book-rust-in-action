@@ -55,3 +55,49 @@ Usual approach: two 32 bits integers: one that counts seconds and another one th
 
 Implementations are not consistent across all options. Timezones are also a source of disparity, although a usual
 approach is storing another integer with the seconds offset from UTC.
+
+### Time formats
+
+Examples of timestamp formats:
+
+- **Timestamp**, also usually known as *UNIX timestamp*. Number of seconds since the reference epoch.
+- **ISO 8601**. A string with information about date, time, timezone, etc.
+- **RFC 2822**. Format used by email headers.
+- **RFC 3339**. Less strict version of the ISO 8601 standard. A RFC 3339 compliant timestamp is also ISO 8601 compliant,
+  but the opposite is not.
+
+## Time in Rust
+
+The community usual choice for time handling in Rust is the `chrono` crate.
+
+Rust compiler refuses to compile a program if finds an illegal arithmetic operation between times (or one that doesn't
+take timezones into account).
+
+## Never type
+
+A function that never returns a value is declared as having a `!` return type. The exclamation operation is, then, the
+Never type.
+
+```rust
+fn setValue(input: number) -> ! {
+  something.key = input;
+}
+```
+
+In this example, the `setValue` function never returns.
+
+## Zero sized types
+
+A struct with no fields is known as a **zero-sized type** or **ZST**.
+
+```rust
+struct Clock;
+```
+
+ZST structs do not occupy memory in the resulting application, it's a mere compile time construct.
+
+## Command line interface
+
+A popular crate for validating command line inputs in a clean and comfortable manner is `clap`.
+
+Two of the main types `clap` provides are `clap::App` and `clap::Arg`.
